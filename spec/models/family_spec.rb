@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "model/family"
+require "models/family"
 require "error"
 
 RSpec.describe Family do

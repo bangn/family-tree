@@ -2,7 +2,7 @@
 
 require "error"
 require "gender"
-require "model/person"
+require "models/person"
 
 class Family
   attr_accessor :members

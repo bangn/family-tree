@@ -2,7 +2,7 @@
 
 require "error"
 require "gender"
-require "model/person"
+require "models/person"
 
 RSpec.describe Person do
   describe ".initialize" do
