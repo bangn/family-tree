@@ -2,5 +2,10 @@
 
 source 'https://rubygems.org'
 
-gem 'pry'
-gem 'rspec'
+group :developemnt do
+  gem 'pry'
+end
+
+group :test do
+  gem 'rspec'
+end
