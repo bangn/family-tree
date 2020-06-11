@@ -7,9 +7,7 @@ class Person
   attr_accessor :name, :gender, :spouses, :children, :mother
 
   def initialize(name:, gender:)
-    if (gender != Gender::MALE) && (gender != Gender::FEMALE)
-      raise Error::NotSupportedGender
-    end
+    raise Error::NotSupportedGender unless Gender.supported_genders.include?(gender)
 
     @name = name
     @gender = gender
