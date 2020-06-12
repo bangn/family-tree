@@ -41,18 +41,16 @@ RSpec.describe Person do
     let(:husband) { Person.new(name: Faker::Name.first_name, gender: Gender::MALE) }
     let(:wife) { Person.new(name: Faker::Name.first_name, gender: Gender::FEMALE) }
 
-    it "appends the spouse to a person" do
+    it "assigns the spouse to a person" do
       husband.add_spouse(wife)
 
-      expect(husband.spouses.count).to eq(1)
-      expect(husband.spouses.first).to eq(wife)
+      expect(husband.spouse).to eq(wife)
     end
 
-    it "add the person to spouse" do
+    it "assigns a person to the spouse" do
       husband.add_spouse(wife)
 
-      expect(wife.spouses.count).to eq(1)
-      expect(wife.spouses.first).to eq(husband)
+      expect(wife.spouse).to eq(husband)
     end
   end
 
@@ -60,9 +58,27 @@ RSpec.describe Person do
     let(:person) { Person.new(name: Faker::Name.first_name, gender: Gender::FEMALE) }
     let(:child) { Person.new(name: Faker::Name.first_name, gender: Gender::FEMALE) }
 
-    it "adds child to the person" do
-      person.add_child(child)
-      expect(person.children.count).to eq(1)
+    describe "when the person does not have spouse" do
+      it "adds child to the person" do
+        person.add_child(child)
+        expect(person.children.count).to eq(1)
+      end
+    end
+
+    describe "when the person has spouse" do
+      let(:person_spouse) { Person.new(name: Faker::Name.first_name, gender: Gender::MALE) }
+
+      before(:each) { person.add_spouse(person_spouse) }
+
+      it "adds child to the person" do
+        person.add_child(child)
+        expect(person.children.count).to eq(1)
+      end
+
+      it "adds child to the person's spouse" do
+        person.add_child(child)
+        expect(person.spouse.children.count).to eq(1)
+      end
     end
   end
 end

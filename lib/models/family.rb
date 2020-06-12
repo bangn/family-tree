@@ -41,27 +41,6 @@ class Family
     @members.push(child_spouse)
   end
 
-  def get_relationhip(name:, relationship_type:)
-    person = find(name: name)
-
-    raise Error::PersonNotFound if person.nil?
-
-    if !Relationship.supported_relationships.include?(relationship_type.upcase)
-      raise Error::NotSupportedRelationship
-    end
-
-    case relationship_type.upcase
-    when Relationship::DAUGHTER
-      return person.daughters
-    when Relationship::SON
-      return person.sons
-    when Relationship::SIBLINGS
-      return person.siblings
-    else
-      return []
-    end
-  end
-
   def find(name:)
     @members.find { |person| person.name == name }
   end
