@@ -26,6 +26,8 @@ class Family
     child = Person.new(name: child_name, gender: gender)
     @members.push(child)
     mother.add_child(child)
+
+    child.mother = mother
   end
 
   def marry(child_name:, spouse_name:, gender:)
@@ -53,6 +55,8 @@ class Family
       return person.daughters
     when Relationship::SON
       return person.sons
+    when Relationship::SIBLINGS
+      return person.siblings
     else
       return []
     end

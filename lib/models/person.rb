@@ -32,6 +32,10 @@ class Person
     self_children.select { |child| child.gender == Gender::MALE }
   end
 
+  def siblings
+    mother.children.select { |child| child.name != self.name }
+  end
+
   private
 
   def self_children

@@ -64,6 +64,11 @@ RSpec.describe Family do
         expect(mother.children.count).to eq(1)
         expect(mother.children.first.name).to eq(child_name)
       end
+
+      it "assigns a mother to the child" do
+        child = family.find(name: child_name)
+        expect(child.mother.name).to eq(mother_name)
+      end
     end
   end
 
@@ -136,6 +141,20 @@ RSpec.describe Family do
 
       it "returns sons of specified person in correct order it was added" do
         expect(shan_sons.map(&:name)).to eq(["Chit", "Ish", "Vich", "Aras"])
+      end
+    end
+
+    describe "when the relationship is siblings" do
+      let(:shan_siblings) do
+        family.get_relationhip(name: "Chit", relationship_type: Relationship::SIBLINGS)
+      end
+
+      it "returns correct siblings of specified person" do
+        expect(shan_siblings.count).to eq(4)
+      end
+
+      it "returns siblings of specified person in correct order it was added" do
+        expect(shan_siblings.map(&:name)).to eq(["Ish", "Vich", "Aras", "Satya"])
       end
     end
   end
