@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require "faker"
+
 require "models/family"
 require "error"
 
 RSpec.describe Family do
-  let(:father_name) { "Shan" }
-  let(:mother_name) { "Angar" }
+  let(:father_name) { Faker::Name.first_name }
+  let(:mother_name) { Faker::Name.first_name }
   let(:family) { Family.new(father_name: father_name, mother_name: mother_name) }
 
   describe ".initialize" do
@@ -26,7 +28,7 @@ RSpec.describe Family do
   end
 
   describe ".add_child" do
-    let(:child_name) { "Child" }
+    let(:child_name) { Faker::Name.first_name }
 
     context "when mother name does not exist" do
       it "throws PersonNotFound error" do
@@ -63,6 +65,8 @@ RSpec.describe Family do
     end
   end
 
-  describe "get_relationship" do
+  describe ".get_relationship" do
+    describe "when person is not a member of the family" do
+    end
   end
 end
