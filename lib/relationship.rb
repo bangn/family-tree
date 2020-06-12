@@ -8,7 +8,7 @@ class Relationship
   MATERNAL_UNCLE = "MATERNAL_UNCLE"
 
   # Father's sisters
-  PARTERNAL_AUNT = "MATERNAL_AUNT"
+  PATERNAL_AUNT = "PATERNAL_AUNT"
 
   # Mother's sisters
   MATERNAL_AUNT = "MATERNAL_AUNT"
@@ -47,6 +47,8 @@ class Relationship
       return paternal_uncles(person)
     when MATERNAL_UNCLE
       return maternal_uncles(person)
+    when PATERNAL_AUNT
+      return paternal_aunts(person)
     else
       return []
     end
@@ -80,5 +82,13 @@ class Relationship
     return [] if person.mother.nil?
 
     siblings(person.mother).select { |person| person.gender == Gender::MALE && person.name }
+  end
+
+  def self.paternal_aunts(person)
+    father = person.mother&.spouse
+
+    return [] if father.nil?
+
+    siblings(father).select { |person| person.gender == Gender::FEMALE }
   end
 end
