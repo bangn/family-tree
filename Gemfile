@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 group :developemnt do
   gem "pry"
+  gem "pry-byebug"
 end
 
 group :test do
