@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Error
-  class NotSupportedGender < StandardError; end
-  class PersonNotFound < StandardError; end
   class InappropriateMotherGender < StandardError; end
+  class NotSupportedGender < StandardError; end
+  class NotSupportedRelationship < StandardError; end
+  class PersonNotFound < StandardError; end
 end

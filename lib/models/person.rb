@@ -23,4 +23,18 @@ class Person
   def add_child(child)
     children.push(child)
   end
+
+  def daughters
+    self_children.select { |child| child.gender == Gender::FEMALE }
+  end
+
+  def sons
+    self_children.select { |child| child.gender == Gender::MALE }
+  end
+
+  private
+
+  def self_children
+    children.empty? ? spouses.map(&:children).flatten : children
+  end
 end
