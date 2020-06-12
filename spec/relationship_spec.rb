@@ -24,7 +24,7 @@ describe Relationship do
       end
     end
 
-    describe "when the relationship is daughters" do
+    describe "dauthers" do
       let(:shan_daughters) do
         Relationship.get(relationship_type: Relationship::DAUGHTER, family: family, name: "Shan")
       end
@@ -34,7 +34,7 @@ describe Relationship do
       end
     end
 
-    describe "when the relationship is son" do
+    describe "sons" do
       let(:shan_sons) do
         Relationship.get(relationship_type: Relationship::SON, family: family, name: "Shan")
       end
@@ -48,8 +48,8 @@ describe Relationship do
       end
     end
 
-    describe "when the relationship is siblings" do
-      describe "when the person has siblings" do
+    describe "siblings" do
+      context "when the person has siblings" do
         let(:chit_siblings) do
           Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Chit")
         end
@@ -63,7 +63,7 @@ describe Relationship do
         end
       end
 
-      describe "when the person does not have a siblings" do
+      context "when the person does not have a siblings" do
         it "returns empty array" do
           expect(
             Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Shan")
@@ -79,6 +79,38 @@ describe Relationship do
 
           expect(
             Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Jaya")
+          ).to eq([])
+        end
+      end
+    end
+
+    describe "paternal uncles" do
+      context "when the person has paternal uncles" do
+        let(:dritha_paternal_uncles) do
+          Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: king_shan_family, name: "Dritha")
+        end
+
+        it "returns correct number of persons" do
+          expect(dritha_paternal_uncles.count).to eq(3)
+        end
+
+        it "returns correct order as a person was added" do
+          expect(dritha_paternal_uncles.map(&:name)).to eq(["Ish", "Vich", "Aras"])
+        end
+      end
+
+      context "when the person does not have paternal uncles" do
+        it "returns empty array" do
+          expect(
+            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: king_shan_family, name: "Laki")
+          ).to eq([])
+        end
+      end
+
+      context "when the person does not have father" do
+        it "returns empty array" do
+          expect(
+            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: king_shan_family, name: "Shan")
           ).to eq([])
         end
       end

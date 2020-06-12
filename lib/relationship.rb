@@ -2,22 +2,22 @@
 
 class Relationship
   # Father's brothers
-  PATERNAL_UNCLE = "PATERNAL-UNCLE"
+  PATERNAL_UNCLE = "PATERNAL_UNCLE"
 
   # Mother's brothers
-  MATERNAL_UNCLE = "MATERNAL-UNCLE"
+  MATERNAL_UNCLE = "MATERNAL_UNCLE"
 
   # Father's sisters
-  PARTERNAL_AUNT = "MATERNAL-AUNT"
+  PARTERNAL_AUNT = "MATERNAL_AUNT"
 
   # Mother's sisters
-  MATERNAL_AUNT = "MATERNAL-AUNT"
+  MATERNAL_AUNT = "MATERNAL_AUNT"
 
   # Spouse's sisters, wives of siblings
-  SISTER_IN_LAW = "SISTER-IN-LAW"
+  SISTER_IN_LAW = "SISTER_IN_LAW"
 
   # Spouse's brothers, husband of siblings
-  BROTHER_IN_LAW = "BROTHER-IN-LAW"
+  BROTHER_IN_LAW = "BROTHER_IN_LAW"
 
   SON = "SON"
   DAUGHTER = "DAUGHTER"
@@ -32,17 +32,19 @@ class Relationship
 
     raise Error::PersonNotFound if person.nil?
 
-    if !Relationship.supported_relationships.include?(relationship_type.upcase)
+    if !supported_relationships.include?(relationship_type.upcase)
       raise Error::NotSupportedRelationship
     end
 
     case relationship_type.upcase
-    when Relationship::DAUGHTER
+    when DAUGHTER
       return daughters(person)
-    when Relationship::SON
+    when SON
       return sons(person)
-    when Relationship::SIBLINGS
+    when SIBLINGS
       return siblings(person)
+    when PATERNAL_UNCLE
+      return paternal_uncles(person)
     else
       return []
     end
@@ -60,5 +62,15 @@ class Relationship
 
   def self.siblings(person)
     person.mother&.children&.select { |child| child.name != person.name } || []
+  end
+
+  def self.paternal_uncles(person)
+    father = person.mother&.spouse
+
+    return [] if father.nil?
+
+    siblings(father).select do |person|
+      person.gender == Gender::MALE && person.name != father.name
+    end
   end
 end
