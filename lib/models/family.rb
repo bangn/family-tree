@@ -30,8 +30,8 @@ class Family
     child.mother = mother
   end
 
-  def marry(child_name:, spouse_name:, gender:)
-    child = find(name: child_name)
+  def marry(name:, spouse_name:, gender:)
+    child = find(name: name)
 
     raise Error::PersonNotFound if child.nil?
 

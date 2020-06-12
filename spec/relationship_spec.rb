@@ -49,16 +49,38 @@ describe Relationship do
     end
 
     describe "when the relationship is siblings" do
-      let(:shan_siblings) do
-        Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Chit")
+      describe "when the person has siblings" do
+        let(:chit_siblings) do
+          Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Chit")
+        end
+
+        it "returns correct siblings of specified person" do
+          expect(chit_siblings.count).to eq(4)
+        end
+
+        it "returns siblings of specified person in correct order it was added" do
+          expect(chit_siblings.map(&:name)).to eq(["Ish", "Vich", "Aras", "Satya"])
+        end
       end
 
-      it "returns correct siblings of specified person" do
-        expect(shan_siblings.count).to eq(4)
-      end
+      describe "when the person does not have a siblings" do
+        it "returns empty array" do
+          expect(
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Shan")
+          ).to eq([])
 
-      it "returns siblings of specified person in correct order it was added" do
-        expect(shan_siblings.map(&:name)).to eq(["Ish", "Vich", "Aras", "Satya"])
+          expect(
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Anga")
+          ).to eq([])
+
+          expect(
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Yodhan")
+          ).to eq([])
+
+          expect(
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Jaya")
+          ).to eq([])
+        end
       end
     end
   end
@@ -76,10 +98,10 @@ def king_shan_family
   family.add_child(mother_name: "Anga", child_name: "Satya", gender: Gender::FEMALE)
 
   # Second generation with spouse
-  family.marry(child_name: "Chit", spouse_name: "Amba", gender: Gender::FEMALE)
-  family.marry(child_name: "Vich", spouse_name: "Lika", gender: Gender::FEMALE)
-  family.marry(child_name: "Aras", spouse_name: "Chitra", gender: Gender::FEMALE)
-  family.marry(child_name: "Satya", spouse_name: "Vyan", gender: Gender::MALE)
+  family.marry(name: "Chit", spouse_name: "Amba", gender: Gender::FEMALE)
+  family.marry(name: "Vich", spouse_name: "Lika", gender: Gender::FEMALE)
+  family.marry(name: "Aras", spouse_name: "Chitra", gender: Gender::FEMALE)
+  family.marry(name: "Satya", spouse_name: "Vyan", gender: Gender::MALE)
 
   # Third generation
   family.add_child(mother_name: "Amba", child_name: "Dritha", gender: Gender::FEMALE)
@@ -97,10 +119,10 @@ def king_shan_family
   family.add_child(mother_name: "Satya", child_name: "Atya", gender: Gender::FEMALE)
 
   # Third generation with spouse
-  family.marry(child_name: "Dritha", spouse_name: "Jaya", gender: Gender::MALE)
-  family.marry(child_name: "Jnki", spouse_name: "Arit", gender: Gender::MALE)
-  family.marry(child_name: "Asva", spouse_name: "Satvy", gender: Gender::FEMALE)
-  family.marry(child_name: "Vyas", spouse_name: "Krpi", gender: Gender::FEMALE)
+  family.marry(name: "Dritha", spouse_name: "Jaya", gender: Gender::MALE)
+  family.marry(name: "Jnki", spouse_name: "Arit", gender: Gender::MALE)
+  family.marry(name: "Asva", spouse_name: "Satvy", gender: Gender::FEMALE)
+  family.marry(name: "Vyas", spouse_name: "Krpi", gender: Gender::FEMALE)
 
   # Fourth generation
   family.add_child(mother_name: "Dritha", child_name: "Yodhan", gender: Gender::MALE)

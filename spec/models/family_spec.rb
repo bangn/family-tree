@@ -76,7 +76,7 @@ RSpec.describe Family do
     describe "when person is not a member of the family" do
       it "throws PersonNotFound error" do
         expect do
-          family.marry(child_name: child_name, spouse_name: child_spouse_name, gender: Gender::FEMALE)
+          family.marry(name: child_name, spouse_name: child_spouse_name, gender: Gender::FEMALE)
         end.to raise_error(Error::PersonNotFound)
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe Family do
     describe "when person is a member of the family" do
       before(:each) do
         family.add_child(mother_name: mother_name, child_name: child_name, gender: Gender::MALE)
-        family.marry(child_name: child_name, spouse_name: child_spouse_name, gender: Gender::FEMALE)
+        family.marry(name: child_name, spouse_name: child_spouse_name, gender: Gender::FEMALE)
       end
 
       it "appends new member to the family" do

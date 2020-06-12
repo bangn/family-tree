@@ -59,6 +59,6 @@ class Relationship
   end
 
   def self.siblings(person)
-    person.mother&.children&.select { |child| child.name != person.name }
+    person.mother&.children&.select { |child| child.name != person.name } || []
   end
 end
