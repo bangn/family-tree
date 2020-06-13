@@ -175,6 +175,34 @@ describe Relationship do
         end
       end
     end
+
+    describe "maternal aunts" do
+      context "when the person has maternal aunts" do
+        let(:yodhan_maternal_aunts) do
+          Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: king_shan_family, name: "Yodhan")
+        end
+
+        it "returns correct number of persons" do
+          expect(yodhan_maternal_aunts.count).to eq(1)
+        end
+      end
+
+      context "when the person does not have maternal aunts" do
+        it "returns empty array" do
+          expect(
+            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: king_shan_family, name: "Laki")
+          ).to eq([])
+        end
+      end
+
+      context "when the person does not have mother" do
+        it "returns empty array" do
+          expect(
+            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: king_shan_family, name: "Anga")
+          ).to eq([])
+        end
+      end
+    end
   end
 end
 
