@@ -2,22 +2,22 @@
 
 class Relationship
   # Father's brothers
-  PATERNAL_UNCLE = "PATERNAL_UNCLE"
+  PATERNAL_UNCLE = "PATERNAL-UNCLE"
 
   # Mother's brothers
-  MATERNAL_UNCLE = "MATERNAL_UNCLE"
+  MATERNAL_UNCLE = "MATERNAL-UNCLE"
 
   # Father's sisters
-  PATERNAL_AUNT = "PATERNAL_AUNT"
+  PATERNAL_AUNT = "PATERNAL-AUNT"
 
   # Mother's sisters
-  MATERNAL_AUNT = "MATERNAL_AUNT"
+  MATERNAL_AUNT = "MATERNAL-AUNT"
 
   # Spouse's sisters, wives of siblings
-  SISTER_IN_LAW = "SISTER_IN_LAW"
+  SISTER_IN_LAW = "SISTER-IN-LAW"
 
   # Spouse's brothers, husband of siblings
-  BROTHER_IN_LAW = "BROTHER_IN_LAW"
+  BROTHER_IN_LAW = "BROTHER-IN-LAW"
 
   SON = "SON"
   DAUGHTER = "DAUGHTER"
@@ -31,10 +31,6 @@ class Relationship
     person = family.find(name: name)
 
     raise Error::PersonNotFound if person.nil?
-
-    if !supported_relationships.include?(relationship_type.upcase)
-      raise Error::NotSupportedRelationship
-    end
 
     case relationship_type.upcase
     when DAUGHTER
@@ -52,7 +48,7 @@ class Relationship
     when MATERNAL_AUNT
       return maternal_aunts(person)
     else
-      return []
+      raise Error::NotSupportedRelationship
     end
   end
 
