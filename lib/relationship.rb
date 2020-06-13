@@ -49,6 +49,8 @@ class Relationship
       return maternal_aunts(person)
     when SISTER_IN_LAW
       return sisters_in_law(person)
+    when BROTHER_IN_LAW
+      return brothers_in_law(person)
     else
       raise Error::NotSupportedRelationship
     end
@@ -112,5 +114,19 @@ class Relationship
     end
 
     spouse_sisters + wive_of_siblings
+  end
+
+  def self.brothers_in_law(person)
+    spouse_brothers = if person.spouse.nil?
+        []
+      else
+        siblings(person.spouse).select { |spouse_sibling| spouse_sibling&.gender == Gender::MALE }
+      end
+
+    husband_of_siblings = siblings(person).map(&:spouse).select do |husband_of_sibling|
+      husband_of_sibling&.gender == Gender::MALE
+    end
+
+    spouse_brothers + husband_of_siblings
   end
 end

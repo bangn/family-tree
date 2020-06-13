@@ -218,6 +218,9 @@ describe Relationship do
           expect(
             Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Jaya").count
           ).to eq(1)
+          expect(
+            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Yodhan").count
+          ).to eq(0)
         end
 
         it "returns correct order as a person was added" do
@@ -240,6 +243,39 @@ describe Relationship do
 
         it "returns correct order as a person was added" do
           expect(ish_sisters_in_laws.map(&:name)).to eq(["Amba", "Lika", "Chitra"])
+        end
+      end
+    end
+
+    describe "brother in law" do
+      context "when the person has spouse" do
+        let (:chit_brothers_in_laws) do
+          Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Chit")
+        end
+
+        it "returns correct number of persons" do
+          expect(chit_brothers_in_laws.count).to eq(1)
+          expect(
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Satvy").count
+          ).to eq(1)
+          expect(
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Jaya").count
+          ).to eq(1)
+          expect(
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count
+          ).to eq(0)
+        end
+      end
+
+      context "when the person does not have a spouse" do
+        it "returns correct number of persons" do
+          expect(
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Ish").count
+          ).to eq(1)
+
+          expect(
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count
+          ).to eq(0)
         end
       end
     end
