@@ -14,9 +14,9 @@ class Runner
         child_name: command_arguments[1],
         gender: command_arguments[2],
       )
-      return { error: nil, output: nil }
+      return { command_type: command_type, error: nil, output: nil }
     end
   rescue Error::PersonNotFound => error
-    return { error: error, output: nil }
+    return { command_type: command_type, error: error, output: nil }
   end
 end

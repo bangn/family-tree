@@ -13,8 +13,9 @@ RSpec.describe Runner do
           command = Command.new(type: Command::ADD_CHILD, arguments: ["Anga", "Agna", Gender::FEMALE])
           result = Runner.run(command: command, family: king_shan_family)
 
-          expect(result[:error]).to be nil
-          expect(result[:output]).to be nil
+          expect(result[:command_type]).to eq(Command::ADD_CHILD)
+          expect(result[:error]).to be(nil)
+          expect(result[:output]).to be(nil)
         end
       end
 
@@ -23,8 +24,9 @@ RSpec.describe Runner do
           command = Command.new(type: Command::ADD_CHILD, arguments: ["no_name", "Agna", Gender::FEMALE])
           result = Runner.run(command: command, family: king_shan_family)
 
+          expect(result[:command_type]).to eq(Command::ADD_CHILD)
           expect(result[:error]).to be_a(Error::PersonNotFound)
-          expect(result[:output]).to be nil
+          expect(result[:output]).to be(nil)
         end
       end
     end
