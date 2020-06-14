@@ -16,7 +16,7 @@ class Runner
       )
       return { command_type: command.type, error: nil, output: nil }
     end
-  rescue Error::InappropriateMotherGender, Error::PersonNotFound => error
+  rescue Error::NotSupportedGender, Error::InappropriateMotherGender, Error::PersonNotFound => error
     return { command_type: command.type, error: error, output: nil }
   end
 end
