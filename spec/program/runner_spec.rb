@@ -55,4 +55,37 @@ RSpec.describe Runner do
       end
     end
   end
+
+  context "when getting a relationship" do
+    context "when succeed" do
+      it "returns result and its output" do
+        command = Command.new(type: Command::GET_RELATIONSHIP, arguments: ["Chit", Relationship::SIBLINGS])
+        result = Runner.run(command: command, family: king_shan_family)
+
+        expect(result[:command_type]).to eq(Command::GET_RELATIONSHIP)
+        expect(result[:error]).to be(nil)
+        expect(result[:output].map(&:name)).to eq(["Ish", "Vich", "Aras", "Satya"])
+      end
+    end
+
+    context "when error" do
+      it "when there is no such person in the family" do
+        command = Command.new(type: Command::GET_RELATIONSHIP, arguments: ["no_name", Relationship::SON])
+        result = Runner.run(command: command, family: king_shan_family)
+
+        expect(result[:command_type]).to eq(Command::GET_RELATIONSHIP)
+        expect(result[:error]).to be_a(Error::PersonNotFound)
+        expect(result[:output]).to be(nil)
+      end
+
+      it "when the relationship is not supported" do
+        command = Command.new(type: Command::GET_RELATIONSHIP, arguments: ["Shan", "not_supported_relationship"])
+        result = Runner.run(command: command, family: king_shan_family)
+
+        expect(result[:command_type]).to eq(Command::GET_RELATIONSHIP)
+        expect(result[:error]).to be_a(Error::NotSupportedRelationship)
+        expect(result[:output]).to be(nil)
+      end
+    end
+  end
 end
