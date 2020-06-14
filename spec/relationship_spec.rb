@@ -24,6 +24,14 @@ describe Relationship do
           Relationship.get(relationship_type: "NOT_SUPPORTED", family: family, name: "Chit")
         end.to raise_error(Error::NotSupportedRelationship)
       end
+
+      context "when the person is not part of the family" do
+        it "throws PersonNotFound error" do
+          expect do
+            Relationship.get(relationship_type: Relationship::SON, family: family, name: "does_not_exist")
+          end.to raise_error(Error::PersonNotFound)
+        end
+      end
     end
 
     describe "dauthers" do
