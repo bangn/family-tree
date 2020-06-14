@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-class Error
-  class InappropriateMotherGender < StandardError; end
-  class NotSupportedCommand < StandardError; end
-  class NotSupportedGender < StandardError; end
-  class NotSupportedRelationship < StandardError; end
-  class PersonNotFound < StandardError; end
+module Error
+  class ProgramError < StandardError; end
+
+  class InappropriateMotherGender < ProgramError; end
+  class NotSupportedCommand < ProgramError; end
+  class NotSupportedGender < ProgramError; end
+  class NotSupportedRelationship < ProgramError; end
+  class PersonNotFound < ProgramError; end
 end

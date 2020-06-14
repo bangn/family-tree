@@ -24,7 +24,7 @@ class Runner
 
       return { command_type: command.type, error: nil, output: relationships }
     end
-  rescue Error::NotSupportedRelationship, Error::NotSupportedGender, Error::InappropriateMotherGender, Error::PersonNotFound => error
+  rescue Error::ProgramError => error
     return { command_type: command.type, error: error, output: nil }
   end
 end
