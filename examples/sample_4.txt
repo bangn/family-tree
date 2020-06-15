@@ -1,0 +1,3 @@
+ADD_CHILD Chitra Aria female
+GET_RELATIONSHIP Lavnya Maternal-Aunt
+GET_RELATIONSHIP Aria Siblings
