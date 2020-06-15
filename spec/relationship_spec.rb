@@ -6,7 +6,7 @@ require "relationship"
 
 require_relative "./fixtures/king_shan_family"
 
-describe Relationship do
+RSpec.describe Relationship do
   describe "#get" do
     let(:family) { KingShanFamily.create }
 
