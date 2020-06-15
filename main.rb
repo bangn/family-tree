@@ -23,7 +23,9 @@ king_shan_family = KingShanFamily.create
 input_file = ARGV[0]
 
 lines = File.read(input_file)
-commands = lines.split("\n").map { |line| Parser.parse(line) }
+commands = lines.split("\n")
+  .select { |line| !line.empty? }
+  .map { |line| Parser.parse(line) }
 command_results = commands.map { |command| Runner.run(command: command, family: king_shan_family) }
 outputs = command_results.map { |result| Presenter.present(result) }
 
