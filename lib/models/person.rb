@@ -7,10 +7,10 @@ class Person
   attr_accessor :name, :gender, :spouse, :children, :mother
 
   def initialize(name:, gender:)
-    raise Error::NotSupportedGender unless Gender.supported_genders.include?(gender)
+    raise Error::NotSupportedGender unless Gender.supported_genders.include?(gender.upcase)
 
     @name = name
-    @gender = gender
+    @gender = gender.upcase
     @children = []
   end
 

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Gender
-  MALE = "male"
-  FEMALE = "female"
+  MALE = "MALE"
+  FEMALE = "FEMALE"
 
   def self.supported_genders
-    constants.map(&:to_s).map(&:downcase)
+    constants.map(&:to_s)
   end
 end
