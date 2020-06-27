@@ -5,6 +5,7 @@ require "faker"
 require "gender"
 require "program/command"
 require "program/parser"
+require "relationship"
 
 RSpec.describe Parser do
   describe "#parse" do
@@ -23,16 +24,15 @@ RSpec.describe Parser do
     end
 
     context "when the command is GET_RELATIONSHIP" do
-      let(:mother_name) { Faker::Name.first_name }
-      let(:child_name) { Faker::Name.first_name }
-      let(:gender) { Gender::FEMALE }
-      let(:input) { "#{Command::ADD_CHILD} #{mother_name} #{child_name} #{gender}" }
+      let(:name) { Faker::Name.first_name }
+      let(:relationship) { Relationship::SON }
+      let(:input) { "#{Command::GET_RELATIONSHIP} #{name} #{relationship}" }
 
       it "returns new instance of Command class" do
         command = Parser.parse(input)
 
-        expect(command.type).to eq("ADD_CHILD")
-        expect(command.arguments).to eq([mother_name, child_name, gender])
+        expect(command.type).to eq("GET_RELATIONSHIP")
+        expect(command.arguments).to eq([name, relationship])
       end
     end
 
