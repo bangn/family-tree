@@ -13,7 +13,7 @@ require "program/presenter"
 
 require_relative "./spec/fixtures/king_shan_family"
 
-if ARGV.count == 0
+if ARGV.count.zero?
   puts "Usage: ruby main.rb input_filename"
   exit 1
 end
@@ -23,9 +23,9 @@ king_shan_family = KingShanFamily.create
 input_file = ARGV[0]
 
 lines = File.read(input_file)
-commands = lines.split("\n")
-  .select { |line| !line.empty? }
-  .map { |line| Parser.parse(line) }
+commands = lines.split("\n").
+  reject(&:empty?).
+  map { |line| Parser.parse(line) }
 command_results = commands.map { |command| Runner.run(command: command, family: king_shan_family) }
 outputs = command_results.map { |result| Presenter.present(result) }
 

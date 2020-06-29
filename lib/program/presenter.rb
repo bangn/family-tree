@@ -6,13 +6,11 @@ class Presenter
   def self.present(command_result)
     case command_result[:command_type]
     when Command::ADD_CHILD
-      return present_add_child_result(command_result)
+      present_add_child_result(command_result)
     when Command::GET_RELATIONSHIP
-      return present_get_relationship_result(command_result)
+      present_get_relationship_result(command_result)
     end
   end
-
-  private
 
   def self.present_add_child_result(command_result)
     if command_result[:error].nil?

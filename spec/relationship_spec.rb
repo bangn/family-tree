@@ -76,19 +76,19 @@ RSpec.describe Relationship do
       context "when the person does not have a siblings" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Shan")
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Shan"),
           ).to eq([])
 
           expect(
-            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Anga")
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Anga"),
           ).to eq([])
 
           expect(
-            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Yodhan")
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Yodhan"),
           ).to eq([])
 
           expect(
-            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Jaya")
+            Relationship.get(relationship_type: Relationship::SIBLINGS, family: family, name: "Jaya"),
           ).to eq([])
         end
       end
@@ -112,7 +112,7 @@ RSpec.describe Relationship do
       context "when the person does not have paternal uncles" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: family, name: "Laki")
+            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: family, name: "Laki"),
           ).to eq([])
         end
       end
@@ -120,7 +120,7 @@ RSpec.describe Relationship do
       context "when the person does not have father" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: family, name: "Shan")
+            Relationship.get(relationship_type: Relationship::PATERNAL_UNCLE, family: family, name: "Shan"),
           ).to eq([])
         end
       end
@@ -144,7 +144,7 @@ RSpec.describe Relationship do
       context "when the person does not have maternal uncles" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::MATERNAL_UNCLE, family: family, name: "Vasa")
+            Relationship.get(relationship_type: Relationship::MATERNAL_UNCLE, family: family, name: "Vasa"),
           ).to eq([])
         end
       end
@@ -152,7 +152,7 @@ RSpec.describe Relationship do
       context "when the person does not have mother" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::MATERNAL_UNCLE, family: family, name: "Shan")
+            Relationship.get(relationship_type: Relationship::MATERNAL_UNCLE, family: family, name: "Shan"),
           ).to eq([])
         end
       end
@@ -172,7 +172,7 @@ RSpec.describe Relationship do
       context "when the person does not have paternal aunts" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::PATERNAL_AUNT, family: family, name: "Laki")
+            Relationship.get(relationship_type: Relationship::PATERNAL_AUNT, family: family, name: "Laki"),
           ).to eq([])
         end
       end
@@ -180,7 +180,7 @@ RSpec.describe Relationship do
       context "when the person does not have father" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::PATERNAL_AUNT, family: family, name: "Shan")
+            Relationship.get(relationship_type: Relationship::PATERNAL_AUNT, family: family, name: "Shan"),
           ).to eq([])
         end
       end
@@ -200,7 +200,7 @@ RSpec.describe Relationship do
       context "when the person does not have maternal aunts" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: family, name: "Laki")
+            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: family, name: "Laki"),
           ).to eq([])
         end
       end
@@ -208,7 +208,7 @@ RSpec.describe Relationship do
       context "when the person does not have mother" do
         it "returns empty array" do
           expect(
-            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: family, name: "Anga")
+            Relationship.get(relationship_type: Relationship::MATERNAL_AUNT, family: family, name: "Anga"),
           ).to eq([])
         end
       end
@@ -223,13 +223,13 @@ RSpec.describe Relationship do
         it "returns correct number of persons" do
           expect(chit_sisters_in_laws.count).to eq(2)
           expect(
-            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Satvy").count
+            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Satvy").count,
           ).to eq(1)
           expect(
-            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Jaya").count
+            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Jaya").count,
           ).to eq(1)
           expect(
-            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Yodhan").count
+            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Yodhan").count,
           ).to eq(0)
         end
 
@@ -247,7 +247,7 @@ RSpec.describe Relationship do
           expect(ish_sisters_in_laws.count).to eq(3)
 
           expect(
-            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Yodhan").count
+            Relationship.get(relationship_type: Relationship::SISTER_IN_LAW, family: family, name: "Yodhan").count,
           ).to eq(0)
         end
 
@@ -266,13 +266,13 @@ RSpec.describe Relationship do
         it "returns correct number of persons" do
           expect(chit_brothers_in_laws.count).to eq(1)
           expect(
-            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Satvy").count
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Satvy").count,
           ).to eq(1)
           expect(
-            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Jaya").count
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Jaya").count,
           ).to eq(1)
           expect(
-            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count,
           ).to eq(0)
         end
       end
@@ -280,11 +280,11 @@ RSpec.describe Relationship do
       context "when the person does not have a spouse" do
         it "returns correct number of persons" do
           expect(
-            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Ish").count
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Ish").count,
           ).to eq(1)
 
           expect(
-            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count
+            Relationship.get(relationship_type: Relationship::BROTHER_IN_LAW, family: family, name: "Yodhan").count,
           ).to eq(0)
         end
       end

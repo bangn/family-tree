@@ -34,29 +34,27 @@ class Relationship
 
     case relationship_type.upcase
     when DAUGHTER
-      return daughters(person)
+      daughters(person)
     when SON
-      return sons(person)
+      sons(person)
     when SIBLINGS
-      return siblings(person)
+      siblings(person)
     when PATERNAL_UNCLE
-      return paternal_uncles(person)
+      paternal_uncles(person)
     when MATERNAL_UNCLE
-      return maternal_uncles(person)
+      maternal_uncles(person)
     when PATERNAL_AUNT
-      return paternal_aunts(person)
+      paternal_aunts(person)
     when MATERNAL_AUNT
-      return maternal_aunts(person)
+      maternal_aunts(person)
     when SISTER_IN_LAW
-      return sisters_in_law(person)
+      sisters_in_law(person)
     when BROTHER_IN_LAW
-      return brothers_in_law(person)
+      brothers_in_law(person)
     else
       raise Error::NotSupportedRelationship
     end
   end
-
-  private
 
   def self.daughters(person)
     person.children.select { |child| child.gender == Gender::FEMALE }
@@ -75,8 +73,8 @@ class Relationship
 
     return [] if father.nil?
 
-    siblings(father).select do |person|
-      person.gender == Gender::MALE && person.name != father.name
+    siblings(father).select do |father_sibling|
+      father_sibling.gender == Gender::MALE && father_sibling.name != father.name
     end
   end
 
@@ -104,10 +102,10 @@ class Relationship
 
   def self.sisters_in_law(person)
     spouse_sisters = if person.spouse.nil?
-        []
-      else
-        siblings(person.spouse).select { |spouse_sibling| spouse_sibling&.gender == Gender::FEMALE }
-      end
+                       []
+                     else
+                       siblings(person.spouse).select { |spouse_sibling| spouse_sibling&.gender == Gender::FEMALE }
+                     end
 
     wive_of_siblings = siblings(person).map(&:spouse).select do |wife_of_sibling|
       wife_of_sibling&.gender == Gender::FEMALE
@@ -118,10 +116,10 @@ class Relationship
 
   def self.brothers_in_law(person)
     spouse_brothers = if person.spouse.nil?
-        []
-      else
-        siblings(person.spouse).select { |spouse_sibling| spouse_sibling&.gender == Gender::MALE }
-      end
+                        []
+                      else
+                        siblings(person.spouse).select { |spouse_sibling| spouse_sibling&.gender == Gender::MALE }
+                      end
 
     husband_of_siblings = siblings(person).map(&:spouse).select do |husband_of_sibling|
       husband_of_sibling&.gender == Gender::MALE

@@ -28,6 +28,8 @@ class Family
     mother.add_child(child)
 
     child.mother = mother
+
+    child
   end
 
   def marry(name:, spouse_name:, gender:)
@@ -42,6 +44,6 @@ class Family
   end
 
   def find(name:)
-    @members.find { |person| person.name == name }
+    @members.detect { |person| person.name == name }
   end
 end

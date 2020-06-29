@@ -10,6 +10,7 @@ class Command
 
   def initialize(type:, arguments:)
     raise Error::NotSupportedCommand unless Command.support?(type.upcase)
+
     @arguments = arguments
     @type = type
   end

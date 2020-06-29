@@ -14,7 +14,7 @@ class Runner
         child_name: command_arguments[1],
         gender: command_arguments[2],
       )
-      return { command_type: command.type, error: nil, output: nil }
+      { command_type: command.type, error: nil, output: nil }
     when Command::GET_RELATIONSHIP
       relationships = Relationship.get(
         name: command_arguments[0],
@@ -22,9 +22,9 @@ class Runner
         family: family,
       )
 
-      return { command_type: command.type, error: nil, output: relationships }
+      { command_type: command.type, error: nil, output: relationships }
     end
-  rescue Error::ProgramError => error
-    return { command_type: command.type, error: error, output: nil }
+  rescue Error::ProgramError => e
+    { command_type: command.type, error: e, output: nil }
   end
 end

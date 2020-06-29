@@ -11,6 +11,7 @@ class Parser
     command_arguments = command_and_arguments[1..]
 
     raise Error::NotSupportedCommand unless Command.support?(command_type)
+
     Command.new(type: command_type, arguments: command_arguments)
   end
 end

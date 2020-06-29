@@ -21,6 +21,6 @@ class Person
 
   def add_child(child)
     @children.push(child)
-    @spouse.children.push(child) unless @spouse.nil?
+    @spouse&.children&.push(child)
   end
 end
